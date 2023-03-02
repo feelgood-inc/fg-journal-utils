@@ -1,0 +1,4 @@
+# Gitignore for golang module
+.idea
+*.iml
+.vscode
