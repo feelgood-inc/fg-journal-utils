@@ -1,13 +1,14 @@
 package client
 
 import (
-	"flgd-transactionalEvents/events"
+	"fg-journal-utils/events"
+	"log"
+	"time"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/go-resty/resty/v2"
 	"github.com/jaevor/go-nanoid"
 	"github.com/spf13/viper"
-	"log"
-	"time"
 )
 
 type TransactionalEventsClient struct {
