@@ -1,4 +1,4 @@
-module github.com/feelgood-inc/flgd-gommon
+module github.com/feelgood-inc/fg-journal-utils
 
 go 1.18
 
