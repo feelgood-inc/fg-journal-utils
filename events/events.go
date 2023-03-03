@@ -1,6 +1,9 @@
 package events
 
-import "time"
+import (
+	"github.com/invopop/validation"
+	"time"
+)
 
 type TransactionalEventName string
 type TransactionalEventAction string
@@ -38,4 +41,22 @@ type TransactionalEventPayload struct {
 type TransactionalEventClientConfig struct {
 	Host  string
 	Debug bool
+}
+
+func (c *TransactionalEventPayload) Validate() error {
+	return validation.ValidateStruct(c,
+		validation.Field(&c.Event, validation.Required),
+		validation.Field(&c.Resource, validation.Required),
+		validation.Field(&c.SentBy, validation.Required),
+	)
+}
+
+func (c *TransactionalEventResource) Validate() error {
+	return validation.ValidateStruct(c,
+		validation.Field(&c.OriginalResource,
+			validation.When(c.ActionTaken == TransactionalEventActionUpdate || c.ActionTaken == TransactionalEventActionDelete, validation.Required)),
+		validation.Field(&c.ResultingResource,
+			validation.When(c.ActionTaken == TransactionalEventActionUpdate || c.ActionTaken == TransactionalEventActionDelete || c.ActionTaken == TransactionalEventActionCreate, validation.Required)),
+		validation.Field(&c.ActionTaken, validation.Required),
+	)
 }

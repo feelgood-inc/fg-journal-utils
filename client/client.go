@@ -5,7 +5,6 @@ import (
 	"log"
 	"time"
 
-	"github.com/go-playground/validator/v10"
 	"github.com/go-resty/resty/v2"
 	"github.com/jaevor/go-nanoid"
 	"github.com/spf13/viper"
@@ -46,12 +45,11 @@ func NewTransactionalEventsClient(config events.TransactionalEventClientConfig) 
 }
 
 func (c *TransactionalEventsClient) SendEvent(payload events.TransactionalEventPayload) error {
-	validate := validator.New()
-	err := validate.Struct(payload)
+	err := payload.Validate()
 	if err != nil {
 		return err
 	}
-
+	
 	go func() {
 		nanoID, err := nanoid.Standard(21)
 		if err != nil {
