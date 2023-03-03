@@ -43,6 +43,22 @@ type TransactionalEventClientConfig struct {
 	Debug bool
 }
 
+func (c TransactionEvent) Validate() error {
+	return validation.ValidateStruct(&c,
+		validation.Field(&c.Event, validation.Required),
+		validation.Field(&c.Metadata),
+		validation.Field(&c.Resource, validation.Required),
+	)
+}
+
+func (c TransactionalEventMetadata) Validate() error {
+	return validation.ValidateStruct(&c,
+		validation.Field(&c.TransactionID, validation.Required, validation.Length(21, 21)),
+		validation.Field(&c.SentAt, validation.Required),
+		validation.Field(&c.SentBy, validation.Required),
+	)
+}
+
 func (c TransactionalEventPayload) Validate() error {
 	return validation.ValidateStruct(&c,
 		validation.Field(&c.Event, validation.Required),
