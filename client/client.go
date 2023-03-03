@@ -1,7 +1,7 @@
 package client
 
 import (
-	"github.com/feelgood-inc/flgd-gommon/events"
+	"github.com/feelgood-inc/fg-journal-utils/events"
 	"log"
 	"time"
 
