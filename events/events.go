@@ -18,6 +18,7 @@ type TransactionalEventMetadata struct {
 	TransactionID string    `json:"transaction_id" bson:"transactionID"`
 	SentAt        time.Time `json:"sent_at" bson:"sentAt"`
 	SentBy        string    `json:"sent_by" bson:"sentBy"`
+	ExecutedByUID string    `json:"executed_by_uid" bson:"executedByUID"`
 }
 
 type TransactionalEventResource struct {
@@ -34,9 +35,10 @@ type TransactionEvent struct {
 }
 
 type TransactionalEventPayload struct {
-	Event    TransactionalEventName     `json:"event" validate:"required" bson:"event"`
-	Resource TransactionalEventResource `json:"resource" validate:"required" bson:"resource"`
-	SentBy   string                     `json:"sent_by" validate:"required" bson:"sentBy"`
+	Event         TransactionalEventName     `json:"event" validate:"required" bson:"event"`
+	Resource      TransactionalEventResource `json:"resource" validate:"required" bson:"resource"`
+	SentBy        string                     `json:"sent_by" validate:"required" bson:"sentBy"`
+	ExecutedByUID string                     `json:"executed_by_uid" bson:"executedByUID"`
 }
 
 type TransactionalEventClientConfig struct {
