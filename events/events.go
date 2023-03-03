@@ -78,5 +78,6 @@ func (c TransactionalEventResource) Validate() error {
 				c.ActionTaken == TransactionalEventActionDelete ||
 				c.ActionTaken == TransactionalEventActionCreate, validation.Required)),
 		validation.Field(&c.ActionTaken, validation.Required, validation.In(TransactionalEventActionCreate, TransactionalEventActionUpdate, TransactionalEventActionDelete)),
+		validation.Field(&c.Name, validation.Required),
 	)
 }
