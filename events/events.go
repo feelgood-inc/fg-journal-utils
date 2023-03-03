@@ -51,7 +51,6 @@ func (c *TransactionalEventPayload) Validate() error {
 			validation.When(c.Resource.ActionTaken == TransactionalEventActionUpdate ||
 				c.Resource.ActionTaken == TransactionalEventActionDelete, validation.Required)),
 		validation.Field(&c.Resource.ResultingResource,
-			validation.Required,
 			validation.When(c.Resource.ActionTaken == TransactionalEventActionUpdate ||
 				c.Resource.ActionTaken == TransactionalEventActionDelete ||
 				c.Resource.ActionTaken == TransactionalEventActionCreate, validation.Required)),
