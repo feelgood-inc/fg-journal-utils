@@ -46,15 +46,7 @@ type TransactionalEventClientConfig struct {
 func (c TransactionalEventPayload) Validate() error {
 	return validation.ValidateStruct(&c,
 		validation.Field(&c.Event, validation.Required),
-		validation.Field(&c.Resource, validation.Required),
-		validation.Field(&c.Resource.OriginalResource,
-			validation.When(c.Resource.ActionTaken == TransactionalEventActionUpdate ||
-				c.Resource.ActionTaken == TransactionalEventActionDelete, validation.Required)),
-		validation.Field(&c.Resource.ResultingResource,
-			validation.When(c.Resource.ActionTaken == TransactionalEventActionUpdate ||
-				c.Resource.ActionTaken == TransactionalEventActionDelete ||
-				c.Resource.ActionTaken == TransactionalEventActionCreate, validation.Required)),
-		validation.Field(&c.Resource.ActionTaken, validation.Required, validation.In(TransactionalEventActionCreate, TransactionalEventActionUpdate, TransactionalEventActionDelete)),
+		validation.Field(&c.Resource),
 		validation.Field(&c.SentBy, validation.Required),
 	)
 }
