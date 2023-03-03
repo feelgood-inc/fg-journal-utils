@@ -15,27 +15,27 @@ const (
 )
 
 type TransactionalEventMetadata struct {
-	TransactionID string    `json:"transaction_id"`
-	SentAt        time.Time `json:"sent_at"`
-	SentBy        string    `json:"sent_by"`
+	TransactionID string    `json:"transaction_id" bson:"transactionID"`
+	SentAt        time.Time `json:"sent_at" bson:"sentAt"`
+	SentBy        string    `json:"sent_by" bson:"sentBy"`
 }
 
 type TransactionalEventResource struct {
-	OriginalResource  interface{}              `json:"original_resource"`
-	ResultingResource interface{}              `json:"resulting_resource"`
-	ActionTaken       TransactionalEventAction `json:"action_taken"`
+	OriginalResource  interface{}              `json:"original_resource" bson:"originalResource"`
+	ResultingResource interface{}              `json:"resulting_resource" bson:"resultingResource"`
+	ActionTaken       TransactionalEventAction `json:"action_taken" bson:"actionTaken"`
 }
 
 type TransactionEvent struct {
-	Event    TransactionalEventName     `json:"event"`
-	Metadata TransactionalEventMetadata `json:"metadata"`
-	Resource TransactionalEventResource `json:"resource"`
+	Event    TransactionalEventName     `json:"event" bson:"event"`
+	Metadata TransactionalEventMetadata `json:"metadata" bson:"metadata"`
+	Resource TransactionalEventResource `json:"resource" bson:"resource"`
 }
 
 type TransactionalEventPayload struct {
-	Event    TransactionalEventName     `json:"event" validate:"required"`
-	Resource TransactionalEventResource `json:"resource" validate:"required"`
-	SentBy   string                     `json:"sent_by" validate:"required"`
+	Event    TransactionalEventName     `json:"event" validate:"required" bson:"event"`
+	Resource TransactionalEventResource `json:"resource" validate:"required" bson:"resource"`
+	SentBy   string                     `json:"sent_by" validate:"required" bson:"sentBy"`
 }
 
 type TransactionalEventClientConfig struct {
