@@ -43,7 +43,7 @@ type TransactionalEventClientConfig struct {
 	Debug bool
 }
 
-func (c *TransactionalEventPayload) Validate() error {
+func (c TransactionalEventPayload) Validate() error {
 	return validation.ValidateStruct(&c,
 		validation.Field(&c.Event, validation.Required),
 		validation.Field(&c.Resource, validation.Required),
