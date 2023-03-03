@@ -21,8 +21,8 @@ type TransactionalEventMetadata struct {
 }
 
 type TransactionalEventResource struct {
-	OriginalResource  string                   `json:"original_resource" validate:"required_if=ActionTaken update,delete"`
-	ResultingResource string                   `json:"resulting_resource" validate:"required_if=ActionTaken update,delete,create"`
+	OriginalResource  interface{}              `json:"original_resource"`
+	ResultingResource interface{}              `json:"resulting_resource"`
 	ActionTaken       TransactionalEventAction `json:"action_taken"`
 }
 
