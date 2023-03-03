@@ -46,7 +46,7 @@ type TransactionalEventClientConfig struct {
 func (c *TransactionalEventPayload) Validate() error {
 	return validation.ValidateStruct(c,
 		validation.Field(&c.Event, validation.Required),
-		validation.Field(&c.Resource, validation.Required),
+		validation.Field(&c.Resource),
 		validation.Field(&c.SentBy, validation.Required),
 	)
 }
