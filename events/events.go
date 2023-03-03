@@ -24,6 +24,7 @@ type TransactionalEventResource struct {
 	OriginalResource  interface{}              `json:"original_resource" bson:"originalResource"`
 	ResultingResource interface{}              `json:"resulting_resource" bson:"resultingResource"`
 	ActionTaken       TransactionalEventAction `json:"action_taken" bson:"actionTaken"`
+	Name              string                   `json:"name" bson:"name"`
 }
 
 type TransactionEvent struct {

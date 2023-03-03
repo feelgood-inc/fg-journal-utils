@@ -49,7 +49,7 @@ func (c *TransactionalEventsClient) SendEvent(payload events.TransactionalEventP
 	if err != nil {
 		return err
 	}
-	
+
 	go func() {
 		nanoID, err := nanoid.Standard(21)
 		if err != nil {
@@ -67,6 +67,7 @@ func (c *TransactionalEventsClient) SendEvent(payload events.TransactionalEventP
 				OriginalResource:  payload.Resource.OriginalResource,
 				ResultingResource: payload.Resource.ResultingResource,
 				ActionTaken:       payload.Resource.ActionTaken,
+				Name:              payload.Resource.Name,
 			},
 		}
 		resp, err := c.httpClient.
