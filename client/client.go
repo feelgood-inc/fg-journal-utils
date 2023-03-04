@@ -10,6 +10,10 @@ import (
 	"github.com/spf13/viper"
 )
 
+const (
+	journalMSPath = "/journal/events"
+)
+
 type TransactionalEventsClient struct {
 	httpClient *resty.Client
 }
@@ -62,6 +66,7 @@ func (c *TransactionalEventsClient) SendEvent(payload events.TransactionalEventP
 				TransactionID: nanoID(),
 				SentAt:        time.Now(),
 				SentBy:        payload.SentBy,
+				ExecutedByUID: payload.ExecutedByUID,
 			},
 			Resource: events.TransactionalEventResource{
 				OriginalResource:  payload.Resource.OriginalResource,
@@ -73,11 +78,11 @@ func (c *TransactionalEventsClient) SendEvent(payload events.TransactionalEventP
 		resp, err := c.httpClient.
 			R().
 			SetBody(event).
-			Post("/events")
+			Post(journalMSPath)
 		if err != nil {
 			log.Printf("error sending event: %v", err)
 		}
-		if resp.Error() != 200 {
+		if resp.StatusCode() != 200 {
 			log.Printf("error sending event: %v", resp.Error())
 		}
 	}()
